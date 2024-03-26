@@ -1,0 +1,36 @@
+.card {
+  max-width: 300px;
+  width: 100%;
+
+  border-radius: 5px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.buy, .like {
+  width: 20px;
+  height: 20px;
+  /* stroke: #333; */
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.like {
+  stroke: #333;
+}
+
+.liked {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.liked path {
+  fill: #333;
+}

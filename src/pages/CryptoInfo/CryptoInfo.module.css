@@ -1,0 +1,20 @@
+.liked, .like {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+.liked path {
+  fill: #fff
+}
+
+.like path {
+  stroke: #fff;
+}
+
+.buy {
+  stroke: #fff;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
