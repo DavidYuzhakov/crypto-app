@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICrypto } from "./types";
+import { ICrypto } from "../../types/types";
 
 const FAV_KEY = 'favorites'
 
@@ -8,13 +8,15 @@ type AppState = {
   favorites: ICrypto[]
   assets: ICrypto[]
   id: string
+  drawer: boolean
 }
 
 const initialState: AppState = {
   searchValue: '',
   favorites: JSON.parse(localStorage.getItem(FAV_KEY) ?? '[]'),
   assets: [],
-  id: ''
+  id: '',
+  drawer: false
 }
 
 export const appSlice = createSlice({
@@ -40,9 +42,15 @@ export const appSlice = createSlice({
     },
     updateId (state, action: PayloadAction<string>) {
       state.id = action.payload
+    },
+    onClose (state) {
+      state.drawer = false
+    },
+    onOpen (state) {
+      state.drawer = true
     }
   }
 })
 
-export const { updateValue, addFavorites, removeFavoirtes, addAssets, clearValue, updateId } = appSlice.actions
+export const { updateValue, addFavorites, removeFavoirtes, addAssets, clearValue, updateId, onClose, onOpen } = appSlice.actions
 export default appSlice.reducer

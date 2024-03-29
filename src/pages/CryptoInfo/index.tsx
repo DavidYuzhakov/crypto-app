@@ -4,7 +4,7 @@ import { Flex, Typography } from 'antd'
 import { Line } from 'react-chartjs-2'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
-import { addFavorites, removeFavoirtes } from '../../store/appSlice'
+import { addFavorites, removeFavoirtes } from '../../store/slices/appSlice'
 import { useGetCoinQuery } from '../../store/services/crypto.api'
 import Error from '../../components/Error'
 import styles from "./CryptoInfo.module.css"

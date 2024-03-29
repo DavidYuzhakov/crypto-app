@@ -1,63 +1,31 @@
-import { useRef } from "react";
-import { Link, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import { Layout } from "antd";
 
 import styles from "./AppLayout.module.css"
-import { clearValue, updateValue } from "../../store/appSlice";
-
 import Home from "../../pages/Home"
 import CryptoInfo from "../../pages/CryptoInfo";
 
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import Favorites from "../../pages/Favorites";
-import Drawer from "../Drawer";
+import Modal from "../Modal";
+import Purchased from "../../pages/Purchased";
+import Navigation from "../Navigation";
+import ContentLayout from "../ContentLayout";
 
 export default function AppLayout () {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const value = useAppSelector(state => state.app.searchValue)
-  const dispatch = useAppDispatch()
-
-  function clearSearch () {
-    dispatch(clearValue())
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }
-
-
   return (
     <Layout className={styles.layout}>
       <Layout.Header className={styles.header}>
-        <div className="relative max-w-[180px] ">
-          <input 
-            ref={inputRef}
-            className={styles.input}
-            value={value} 
-            onChange={(e) => dispatch(updateValue(e.target.value))}
-            placeholder="Enter crypto name..." 
-          />
-          {value.length > 0  && <button 
-            className={styles.button} type="button" 
-            onClick={clearSearch}
-          >&times;</button>}
-        </div>
-        <ul className="flex items-center">
-          <li className='mr-5'>
-            <Link to={'/'}>Home</Link>
-          </li>
-          <li className='mr-5'>
-            <Link to={'/favorites'}>Favorites</Link>
-          </li>
-          <li>
-            <Link to={'/my-crypto'}>My crypto</Link>
-          </li>
-        </ul>
+        <Navigation />
       </Layout.Header>
       <Layout.Content>
         <div className={styles.content}>
           <Routes>
             <Route 
-              element={<Home />}
+              element={
+                <ContentLayout title="Home">
+                  <Home />
+                </ContentLayout>
+              }
               path="/"
             />
             <Route 
@@ -65,11 +33,23 @@ export default function AppLayout () {
               path="/crypto/:id"
             />
             <Route 
-              element={<Favorites />}
+              element={
+                <ContentLayout title="Favorites">
+                  <Favorites />
+                </ContentLayout>
+              }
               path="/favorites"
             />
+            <Route 
+              element={
+                <ContentLayout title="Purchased">
+                  <Purchased />
+                </ContentLayout>
+              }
+              path="/purchased"
+            />
           </Routes>
-          <Drawer />
+          <Modal />
         </div> 
 
       </Layout.Content>

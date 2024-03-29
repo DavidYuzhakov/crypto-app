@@ -8,4 +8,5 @@ export default defineConfig({
     react(), 
     svgr(),
   ], 
+  base: "https://davidyuzhakov.github.io/crypto-app"
 })

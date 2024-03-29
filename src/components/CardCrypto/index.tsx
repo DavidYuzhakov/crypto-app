@@ -1,14 +1,14 @@
 import { Card, Tag, Typography } from "antd"
 import { Link } from "react-router-dom";
 
-import { ICrypto } from "../../store/types";
+import { ICrypto } from "../../types/types";
 import styles from "./CardCrypto.module.css"
 import Buy from "../../assets/buy.svg?react"
 import Info from "../../assets/info.svg"
 import Like from "../../assets/like.svg"
 import Liked from "../../assets/liked.svg"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { addFavorites, removeFavoirtes, updateId } from "../../store/appSlice";
+import { addFavorites, onOpen, removeFavoirtes, updateId } from "../../store/slices/appSlice";
 
 const { Meta } = Card
 
@@ -27,6 +27,11 @@ export default function CardCrypto ({id, name, icon, price, rank, symbol, market
   
       dispatch(addFavorites(body))
     }
+  }
+
+  function buyHandler() {
+    dispatch(updateId(id))
+    dispatch(onOpen())
   }
 
   return (
@@ -50,7 +55,7 @@ export default function CardCrypto ({id, name, icon, price, rank, symbol, market
         <Buy 
           className={styles.buy}
           width={20} 
-          onClick={() => dispatch(updateId(id))}
+          onClick={buyHandler}
           stroke={'#000'}
           />,
         <Link to={`../crypto/${id}`} relative="path">
